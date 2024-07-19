@@ -2,7 +2,9 @@ function App() {
 
   return (
     <>
-      <p>welcome to live-poll</p>
+      <p className="text-9xl font-bold underline">
+    Hello world!
+  </p>
     </>
   )
 }
