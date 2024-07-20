@@ -6,9 +6,10 @@ export const validateToken = async () => {
     if (!token) return false;
 
     try {
-        const response = await axios.post('http://5173/auth/validateToken', { token });
+        const response = await axios.post('http://localhost:3000/auth/validateToken', { token });
         if (response.data.valid) {
             return true;
+            
         } else {
             localStorage.removeItem('token');
             return false;
