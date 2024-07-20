@@ -5,12 +5,13 @@ import ViewResults from './pages/ViewResults';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Home from './pages/Home';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home/>} />
+      <Route path="/" element={<PrivateRoute Component={Home} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/create" element={<CreatePoll />} />

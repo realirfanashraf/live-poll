@@ -60,3 +60,26 @@ export const loginUser = async (req, res) => {
     res.status(500).send('Server error');
   }
 };
+
+
+export const validateToken = async (req, res) => {
+  const { token } = req.body;
+
+  try {
+      if (!token) {
+          return res.status(400).json({ valid: false });
+      }
+
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+      const now = Math.floor(Date.now() / 1000);
+      if (decoded.exp < now) {
+          return res.status(401).json({ valid: false });
+      }
+
+      return res.status(200).json({ valid: true });
+  } catch (error) {
+      console.log(error);
+      return res.status(401).json({ valid: false });
+  }
+};
