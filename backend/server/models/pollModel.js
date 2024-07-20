@@ -6,10 +6,10 @@ const PollSchema = new Schema({
   options: [{ type: String, required: true }],
   createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   votes: [{
-    option: { type: String, required: true },
-    votedBy: { type: Schema.Types.ObjectId, ref: 'User', required: true }
+    option: { type: String },
+    votedBy: { type: Schema.Types.ObjectId, ref: 'User'}
   }],
   comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
 }, { timestamps: true });
 
-module.exports = mongoose.model('Poll', PollSchema);
+export default mongoose.model('Poll', PollSchema);

@@ -7,6 +7,7 @@ import cors from 'cors';
 import { connectDB } from './server/connection/database.js';
 import initializeSocket from './socket.js';
 import authRoute from './server/routes/authRoutes.js';
+import pollRoute from './server/routes/pollRoutes.js'
 
 // Initialize dotenv
 dotenv.config();
@@ -27,7 +28,7 @@ app.use(morgan('dev'));
 
 // Routes
 app.use('/auth', authRoute);
-
+app.use('/pollApi' , pollRoute)
 // Connect to the database
 connectDB();
 
