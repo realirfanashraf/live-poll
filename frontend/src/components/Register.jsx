@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+  const navigate = useNavigate()
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -23,15 +25,13 @@ const Register = () => {
         email,
         password,
       });
-      if(response){
-        console.log("its working")
-      }
-      setSuccess(response.data.message);
       setError('');
       setUsername('');
       setEmail('');
       setPassword('');
       setConfirmPassword('');
+      setSuccess(response.data.message);
+      navigate('/login')
     } catch (error) {
       setError(error.response.data.message);
       setSuccess('');

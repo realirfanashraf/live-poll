@@ -1,8 +1,12 @@
 import { useContext, useState } from 'react';
 import { PollContext } from '../context/PollContext';
+import axios from 'axios';
+import {useNavigate} from 'react-router-dom'
+
 
 
 const Login = () => {
+  const navigate = useNavigate()
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { setUser } = useContext(PollContext);
@@ -10,7 +14,18 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setUser()
+    const response = await axios.post('http://localhost:3000/auth/login', {
+      email,
+      password,
+    });
+
+    if(response){
+      console.log(response,"response is here")
+      localStorage.setItem('token', response.data.token);
+      setUser(response.data.user)
+      navigate('/create')
+    }
+   
   };
 
   return (
