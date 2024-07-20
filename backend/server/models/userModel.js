@@ -11,4 +11,4 @@ const UserSchema = new Schema({
   votedPolls: [{ type: Schema.Types.ObjectId, ref: 'Poll' }]
 }, { timestamps: true });
 
-module.exports = mongoose.model('User', UserSchema);
+export default mongoose.model('User', UserSchema);
