@@ -1,8 +1,10 @@
-import { useState} from 'react';
+import { useState, useContext } from 'react';
+import { PollContext } from '../context/PollContext';
 
 const CreatePoll = () => {
   const [question, setQuestion] = useState('');
   const [options, setOptions] = useState(['']);
+  const { polls, setPolls } = useContext(PollContext);
 
   const handleAddOption = () => {
     setOptions([...options, '']);
@@ -16,6 +18,8 @@ const CreatePoll = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const newPoll = { id: polls.length + 1, question, options, votes: {} };
+    setPolls([...polls, newPoll]);
   };
 
   return (

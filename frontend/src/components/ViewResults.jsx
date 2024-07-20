@@ -1,8 +1,11 @@
-import React, {  useEffect, useState } from 'react';
-
+import { useContext, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { PollContext } from '../context/PollContext';
 
 const ViewResults = () => {
-
+  const { pollId } = useParams();
+  const { polls } = useContext(PollContext);
+  const poll = polls.find((poll) => poll.id === parseInt(pollId));
   const [results, setResults] = useState({});
 
   useEffect(() => {
