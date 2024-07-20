@@ -27,3 +27,23 @@ export const createPoll = async (req, res) => {
         });
     }
 };
+
+
+export const getPolls = async (req, res) => {
+    try {
+        const polls = await Poll.find();
+
+        res.status(200).json({
+            status: 200,
+            polls: polls
+        });
+    } catch (error) {
+        console.error('Error fetching polls:', error);
+
+        res.status(500).json({
+            status: 500,
+            message: 'Failed to fetch polls',
+            error: error.message
+        });
+    }
+};
