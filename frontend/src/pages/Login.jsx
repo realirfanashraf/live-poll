@@ -23,7 +23,7 @@ const Login = () => {
       console.log(response,"response is here")
       localStorage.setItem('token', response.data.token);
       setUser(response.data.user)
-      navigate('/create')
+      navigate('/')
     }
    
   };

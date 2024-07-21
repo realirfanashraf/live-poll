@@ -28,18 +28,19 @@ export const createPoll = async (req, res) => {
     }
 };
 
-
 export const getPolls = async (req, res) => {
+    const { userId } = req.query
     try {
+        
         const polls = await Poll.find();
-
+        const userPolls = await Poll.find({ createdBy: userId })
         res.status(200).json({
             status: 200,
-            polls: polls
+            polls: polls,
+            userPolls: userPolls
         });
     } catch (error) {
         console.error('Error fetching polls:', error);
-
         res.status(500).json({
             status: 500,
             message: 'Failed to fetch polls',
