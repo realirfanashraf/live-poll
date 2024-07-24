@@ -1,6 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { PollContext } from "../context/PollContext";
 import axios from 'axios';
+import { Link } from "react-router-dom";
+import NavBar from "./Navbar";
 
 const Polls = () => {
   const { polls, setPolls, user } = useContext(PollContext);
@@ -30,6 +32,8 @@ const Polls = () => {
   const filteredPolls = filter === 'all' ? polls : userPolls;
 
   return (
+    <>
+    <NavBar/>
     <div className="w-full max-w-lg mx-auto text-center bg-blue-100 p-5 rounded-lg">
       <div className="mb-5">
         <button
@@ -48,18 +52,20 @@ const Polls = () => {
       <div className="bg-blue-50 p-3 rounded">
         {filteredPolls.length > 0 ? (
           filteredPolls.map((poll) => (
-            <div
-              className="bg-white text-black py-3 border-b border-blue-200 cursor-pointer hover:bg-gray-100"
-              key={poll._id}
-            >
-              <h3 className="font-bold">{poll.question}</h3>
-            </div>
+            <Link to={`/vote/${poll._id}`} key={poll._id}>
+              <div
+                className="bg-white text-black py-3 border-b border-blue-200 cursor-pointer hover:bg-gray-100"
+              >
+                <h3 className="font-bold">{poll.question}</h3>
+              </div>
+            </Link>
           ))
         ) : (
           <p>No polls available.</p>
         )}
       </div>
     </div>
+    </>
   );
 };
 

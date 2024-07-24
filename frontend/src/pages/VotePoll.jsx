@@ -5,32 +5,44 @@ import { PollContext } from '../context/PollContext';
 const VotePoll = () => {
   const { pollId } = useParams();
   const { polls, setPolls, user } = useContext(PollContext);
-  const poll = polls.find((poll) => poll.id === parseInt(pollId));
+  const poll = polls.find((poll) => poll._id === pollId);
   const [selectedOption, setSelectedOption] = useState('');
 
   const handleVote = () => {
+    if (!selectedOption) return;
+
     const updatedPolls = polls.map((p) =>
-      p.id === poll.id ? { ...p, votes: { ...p.votes, [user.id]: selectedOption } } : p
+      p._id === poll._id ? { ...p, votes: { ...p.votes, [user.id]: selectedOption } } : p
     );
     setPolls(updatedPolls);
   };
 
+  if (!poll) return <div>Poll not found</div>;
+
   return (
-    <div>
-      <h2>{poll.question}</h2>
-      {poll.options.map((option, index) => (
-        <div key={index}>
-          <input
-            type="radio"
-            id={`option${index}`}
-            name="option"
-            value={option}
-            onChange={() => setSelectedOption(option)}
-          />
-          <label htmlFor={`option${index}`}>{option}</label>
-        </div>
-      ))}
-      <button onClick={handleVote}>Vote</button>
+    <div className="w-full max-w-lg mx-auto text-center bg-blue-100 p-5 rounded-lg">
+      <h2 className="font-bold text-xl mb-4">{poll.question}</h2>
+      <div className="bg-blue-50 p-3 rounded">
+        {poll.options.map((option, index) => (
+          <div key={index} className="bg-white text-black py-3 border-b border-blue-200">
+            <input
+              type="radio"
+              id={`option${index}`}
+              name="option"
+              value={option}
+              onChange={() => setSelectedOption(option)}
+              className="mr-2"
+            />
+            <label htmlFor={`option${index}`}>{option}</label>
+          </div>
+        ))}
+      </div>
+      <button
+        onClick={handleVote}
+        className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
+      >
+        Vote
+      </button>
     </div>
   );
 };
