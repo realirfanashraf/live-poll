@@ -6,12 +6,15 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Home from './pages/Home';
 import PrivateRoute from './components/PrivateRoute';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
     <Router>
+      <ToastContainer />
       <Routes>
-      <Route path="/" element={<PrivateRoute Component={Home} />} />
+        <Route path="/" element={<PrivateRoute Component={Home} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/create" element={<PrivateRoute Component={CreatePoll} />} />

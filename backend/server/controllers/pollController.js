@@ -2,7 +2,6 @@ import Poll from '../models/pollModel.js';
 
 export const createPoll = async (req, res) => {
     const { newPoll } = req.body;
-
     try {
         const poll = new Poll({
             question: newPoll.question,
@@ -70,3 +69,6 @@ export const votePoll = async (req, res) => {
         return res.status(500).json({ status: 500, message: "Internal server error" });
     }
 };
+
+
+

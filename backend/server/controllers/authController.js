@@ -55,7 +55,7 @@ export const loginUser = async (req, res) => {
       email: user.email
     };
 
-    res.json({ user: sanitizedUser, token });
+    res.json({ user: sanitizedUser, token,message:"User logged successfully" });
   } catch (error) {
     console.error(error.message);
     res.status(500).send('Server error');
