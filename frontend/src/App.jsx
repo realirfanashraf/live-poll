@@ -14,9 +14,9 @@ function App() {
       <Route path="/" element={<PrivateRoute Component={Home} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/create" element={<CreatePoll />} />
-        <Route path="/vote/:pollId" element={<VotePoll />} />
-        <Route path="/poll/:pollId" element={<ViewResults />} />
+        <Route path="/create" element={<PrivateRoute Component={CreatePoll} />} />
+        <Route path="/vote/:pollId" element={<PrivateRoute Component={VotePoll} />} />
+        <Route path="/poll/:pollId" element={<PrivateRoute Component={ViewResults} />} />
       </Routes>
     </Router>
   );
