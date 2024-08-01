@@ -3,9 +3,11 @@ import { useParams } from 'react-router-dom';
 import { PollContext } from '../context/PollContext';
 import Navbar from '../components/Navbar'
 import axios from 'axios'
-
+import {toast} from 'react-toastify'
+import { useNavigate } from 'react-router-dom';
 const VotePoll = () => {
   const { pollId } = useParams();
+  const navigate = useNavigate()
   const { polls, setPolls, user } = useContext(PollContext);
   const poll = polls.find((poll) => poll._id === pollId);
   const [selectedOption, setSelectedOption] = useState('');
@@ -31,7 +33,9 @@ const VotePoll = () => {
         selectedOption
       });
       if (response.status === 200) {
+        toast.success(response.data.message)
         setPolls(updatedPolls);
+        navigate(`/poll/${pollId}`)
       }
     } catch (error) {
       console.error("Error while voting:", error);

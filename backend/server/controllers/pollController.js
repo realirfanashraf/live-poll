@@ -53,14 +53,14 @@ export const votePoll = async (req, res) => {
     try {
         let poll = await Poll.findById(votedPoll._id);
         if (poll) {
-            const existingVote = poll.votes.find(vote => vote.votedBy.toString() === userId);
+            const existingVote = poll.votes.find(vote => vote.votedBy === userId);
             if (existingVote) {
                 existingVote.option = selectedOption; 
             } else {
                 poll.votes.push({ option: selectedOption, votedBy: userId });
             }
             await poll.save(); 
-            return res.status(200).json({ status: 200, message: "updatedSuccessfully" });
+            return res.status(200).json({ status: 200, message: "Voted Poll Successfully" });
         } else {
             return res.status(404).json({ status: 404, message: "Poll not found" });
         }

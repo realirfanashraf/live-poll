@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import { PollContext } from '../context/PollContext';
 import NavBar from '../components/Navbar';
 import axios from 'axios'
+import { toast } from 'react-toastify';
 
 const CreatePoll = () => {
   const [question, setQuestion] = useState('');
@@ -27,6 +28,7 @@ const CreatePoll = () => {
   
       if (response.data.status === 200) {
         setPolls([...polls, newPoll]);
+        toast.success(response.data.message)
         setQuestion('');
         setOptions(['']);
       } else {

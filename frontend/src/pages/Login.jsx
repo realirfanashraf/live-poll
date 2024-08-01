@@ -21,7 +21,6 @@ const Login = () => {
     });
 
     if (response) {
-      console.log(response, "response is here")
       toast.success(response.data.message)
       localStorage.setItem('token', response.data.token);
       setUser(response.data.user)
