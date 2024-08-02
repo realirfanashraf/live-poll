@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { PollContext } from "../context/PollContext";
 import axios from 'axios';
 import { Link } from "react-router-dom";
-import NavBar from "./Navbar";
 
 const Polls = () => {
   const { polls, setPolls, user } = useContext(PollContext);
@@ -33,7 +32,7 @@ const Polls = () => {
 
   return (
     <>
-    <NavBar/>
+  
     <div className="w-full max-w-lg mx-auto text-center bg-blue-100 p-5 rounded-lg">
       <div className="mb-5">
         <button

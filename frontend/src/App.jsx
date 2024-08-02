@@ -8,6 +8,8 @@ import Home from './pages/Home';
 import PrivateRoute from './components/PrivateRoute';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Profile from './pages/Profile';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Route path="/create" element={<PrivateRoute Component={CreatePoll} />} />
         <Route path="/vote/:pollId" element={<PrivateRoute Component={VotePoll} />} />
         <Route path="/poll/:pollId" element={<PrivateRoute Component={ViewResults} />} />
+        <Route path="/profile" element={<PrivateRoute Component={Profile} />} />
+        <Route path="*" element={<NotFound/>} />
       </Routes>
     </Router>
   );

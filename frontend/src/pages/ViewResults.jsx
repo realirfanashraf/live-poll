@@ -16,8 +16,8 @@ const ViewResults = () => {
           return acc;
         }, {});
 
-        Object.values(poll.votes).forEach((vote) => {
-          results[vote]++;
+        poll.votes.forEach((vote) => {
+          results[vote.option]++;
         });
 
         setResults(results);
@@ -32,7 +32,7 @@ const ViewResults = () => {
   return (
     <div className="w-full max-w-lg mx-auto text-center bg-blue-100 p-5 rounded-lg">
       <h2 className="font-bold text-xl mb-4">{poll.question}</h2>
-       <div className="bg-blue-50 p-3 rounded">
+      <div className="bg-blue-50 p-3 rounded">
         {poll.options.map((option, index) => (
           <div key={index} className="bg-white text-black py-3 border-b border-blue-200">
             <span>{option}</span>: <span>{results[option]}</span>
